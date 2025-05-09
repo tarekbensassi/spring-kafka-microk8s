@@ -1,6 +1,6 @@
-package net.youssfi.springkafka.controllers;
+package com.demo.springkafka.controllers;
 
-import net.youssfi.springkafka.events.PageEvent;
+import com.demo.springkafka.events.PageEvent;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.Windowed;
 import org.apache.kafka.streams.state.KeyValueIterator;

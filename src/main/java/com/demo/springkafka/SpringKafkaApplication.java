@@ -1,4 +1,4 @@
-package net.youssfi.springkafka;
+package com.demo.springkafka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
