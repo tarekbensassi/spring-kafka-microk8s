@@ -30,11 +30,11 @@ pipeline {
             }
         }
 
-        stage('Build JAR') {
+     /*   stage('Build JAR') {
             steps {
                 sh './mvnw clean package -DskipTests'
             }
-        }
+        }*/
 
         stage('Build Docker Image for MicroK8s') {
             steps {
