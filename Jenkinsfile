@@ -2,18 +2,27 @@ pipeline {
     agent any
 
     environment {
+     GITHUB_CREDENTIALS_ID = 'github-ssh-key'   // ID des credentials SSH dans Jenkins
+        GIT_BRANCH = 'main'                        // Branche par défaut (modifiable si nécessaire)
         IMAGE_NAME = "spring-kafka-app"
         IMAGE_TAG = "localbuild-${BUILD_NUMBER}"
     }
 
     stages {
-     stage('Checkout') {
-    steps {
-        sshagent(['git-ssh-key']) {
-            git url: 'git@github.com:tarekbensassi/spring-kafka-microk8s.git', credentialsId: 'git-ssh-key'
+
+    
+        
+          stage('Checkout from GitHub') {
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: env.GITHUB_CREDENTIALS_ID, keyFileVariable: 'ssh-key')]) {
+                    git branch: env.GIT_BRANCH,
+                        credentialsId: env.GITHUB_CREDENTIALS_ID,
+                        url: 'git@github.com:tarekbensassi/spring-kafka-microk8s.git' 
+                }
+            }
         }
-    }
-}
+
+
         stage('Start Kafka with Docker Compose') {
             steps {
                 sh 'docker-compose up -d'
