@@ -39,8 +39,8 @@ pipeline {
       stage('Build Docker Image for MicroK8s') {
     steps {
         sh '''
-            sudo microk8s status --wait-ready
-            sudo microk8s docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+             microk8s status --wait-ready
+             microk8s docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
         '''
     }
 }
@@ -53,17 +53,17 @@ pipeline {
             export PATH=$PATH:/snap/bin
 
             # S'assurer que MicroK8s est prêt
-            sudo microk8s status --wait-ready
+             microk8s status --wait-ready
 
             # Supprimer l'ancien déploiement si présent
-            sudo microk8s kubectl delete deployment spring-kafka-app --ignore-not-found=true
+             microk8s kubectl delete deployment spring-kafka-app --ignore-not-found=true
 
             # Appliquer les fichiers de configuration
-            sudo microk8s kubectl apply -f k8s/deployment.yaml
-            sudo microk8s kubectl apply -f k8s/service.yaml
+             microk8s kubectl apply -f k8s/deployment.yaml
+             microk8s kubectl apply -f k8s/service.yaml
 
             # Mettre à jour l'image du déploiement
-            sudo microk8s kubectl set image deployment/spring-kafka-app spring-kafka-app=${IMAGE_NAME}:${IMAGE_TAG}
+             microk8s kubectl set image deployment/spring-kafka-app spring-kafka-app=${IMAGE_NAME}:${IMAGE_TAG}
         '''
     }
 }
