@@ -23,12 +23,16 @@ import java.util.Random;
 
 @RestController
 public class PageEventController {
-    private StreamBridge streamBridge;
-    @Autowired
-    private InteractiveQueryService interactiveQueryService;
+	
+	
+	
+    private final StreamBridge streamBridge;
 
-    public PageEventController(StreamBridge streamBridge) {
+    private final InteractiveQueryService interactiveQueryService;
+
+    public PageEventController(StreamBridge streamBridge,InteractiveQueryService interactiveQueryService) {
         this.streamBridge = streamBridge;
+        this.interactiveQueryService = interactiveQueryService;
     }
     @GetMapping("/publish")
     public PageEvent send(String name, String topic){
