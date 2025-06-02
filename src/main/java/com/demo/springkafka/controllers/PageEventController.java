@@ -24,7 +24,7 @@ import java.util.Random;
 @RestController
 public class PageEventController {
 	
-	
+	  
 	
     private final StreamBridge streamBridge;
 
